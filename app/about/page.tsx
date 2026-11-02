@@ -31,134 +31,74 @@ export default function About() {
     },
   ]
 
-  const coPresidents = [
+  type TeamMember = {
+    id: string
+    name: string
+    role: string
+    program: string
+    year: string
+    photo?: string
+  }
+
+  const coPresidents: TeamMember[] = [
     {
       id: "co-president-1",
-      name: "Astrid Chavez Chavira",
+      name: "Aksshatt Bariar",
       role: "Co-President",
-      program: "Molecular Biology and Biotechnology (Co-op)",
+      program: "Computer Science Specialist",
       year: "3rd Year",
-      bio: "Co-Founder of BACSA committed to building an interdisciplinary community that bridges academics and industry through research projects, hackathons, and workshops.",
-      photo: "/images/astrid-chavez-photo.jpg",
-      isPresident: true,
+      photo: "/images/aksshatt-bariar-photo.png",
     },
     {
       id: "co-president-2",
-      name: "Nathan Padua",
-      role: "Co-President",
-      program: "Biochemistry & Neuroscience",
-      year: "4th Year",
-      bio: "Passionate about fostering interdisciplinary collaboration and creating opportunities for students in biotech and CS.",
-      photo: "/images/nathan-padua-photo.jpg",
-      isPresident: true,
-    },
-  ]
-
-  const executiveTeam = [
-    {
-      id: "vpbtch",
       name: "Allisha Saini",
-      role: "VP Biotechnology",
+      role: "Co-President",
       program: "Environmental Science",
       year: "3rd Year",
-      bio: "Exploring diverse STEM career paths beyond medical school and research to help students discover opportunities after their undergrad.",
       photo: "/images/allisha-saini-photo.jpg",
-      isPresident: false,
-    },
-    {
-      id: "vpcs",
-      name: "Aksshatt Bariar",
-      role: "VP Computer Science",
-      program: "Computer Science Specialist",
-      year: "3rd Year",
-      bio: "Organizing engaging workshops, panels, and networking events to connect students with industry professionals.",
-      photo: "/images/aksshatt-bariar-photo.png",
-      isPresident: false,
-    },
-    {
-      id: "vpfin",
-      name: "Camila Galarza",
-      role: "VP Finance",
-      program: "International Business",
-      year: "Graduate",
-      bio: "International Business graduate working at TD Bank, contributing financial expertise to support BACSA's innovative growth and development.",
-      photo: "/images/camila-galarza-photo.jpg",
-      isPresident: false,
     },
   ]
 
-  const additionalTeam = [
+  const founders: TeamMember[] = [
     {
-      id: "vpia",
-      name: "George Alexopoulos",
-      role: "VP Internal Affairs",
-      program: "Neuroscience Specialist",
-      year: "4th Year",
-      bio: "4th year Neuroscience student at UTSC excited to get involved with all the events planned for this year at BACSA.",
-      photo: "/images/george-alexopoulos-photo.jpg",
-      isPresident: false,
-    },
-    {
-      id: "vpmark",
-      name: "Camila Bolio Ramírez",
-      role: "VP Marketing",
-      program: "Neuroscience, Human Biology, & Psychology",
-      year: "4th Year",
-      bio: "Passionate about interdisciplinary learning, fostering a supportive space for students to explore biotech and computer science across campuses.",
-      photo: "/images/camila-bolio-photo.jpg",
-      isPresident: false,
-    },
-    {
-      id: "vprsch",
-      name: "Jean Jung",
-      role: "VP Research",
-      program: "Bioinformatics & Computer Science & Immunology",
+      id: "founder-1",
+      name: "Astrid Chavez Chavira",
+      role: "Ex-Co-President",
+      program: "Molecular Biology and Biotechnology (Co-op)",
       year: "3rd Year",
-      bio: "Leading the 2025-26 BACSA Research Project, creating opportunities that unite computer science and life science students through academic rigor and collaboration.",
-      photo: "/images/jean-jung-photo.jpg",
-      isPresident: false,
+      photo: "/images/astrid-chavez-photo.jpg",
+    },
+    {
+      id: "founder-2",
+      name: "Nathan Padua",
+      role: "Ex-Co-President",
+      program: "Biochemistry & Neuroscience",
+      year: "4th Year",
+      photo: "/images/nathan-padua-photo.jpg",
     },
   ]
 
-  const TeamMemberCard = ({ member }: { member: any }) => {
+  const TeamMemberCard = ({ member }: { member: TeamMember }) => {
     return (
-      <div className="group relative w-full h-80 bg-white rounded-lg shadow-md border border-gray-100 overflow-hidden hover:shadow-lg transition-all duration-300">
-        {/* Front Side - Always Visible */}
-        <div className="absolute inset-0 w-full h-full p-6 flex flex-col items-center justify-center text-center transition-opacity duration-300 group-hover:opacity-0">
-          {member.photo ? (
-            <div className="w-24 h-24 rounded-full overflow-hidden mb-4 border-4 border-gradient-to-r from-blue-500 to-teal-400">
-              <img
-                src={member.photo || "/placeholder.svg"}
-                alt={`${member.name} - ${member.role}`}
-                className="w-full h-full object-cover"
-              />
-            </div>
-          ) : (
-            <div className="w-24 h-24 bg-gradient-to-r from-blue-500 to-teal-400 rounded-full flex items-center justify-center mb-4">
-              <span className="text-white font-bold text-2xl">
-                {member.name
-                  .split(" ")
-                  .map((n: string) => n[0])
-                  .join("")}
-              </span>
-            </div>
-          )}
-          <h3 className="text-xl font-semibold text-gray-900 mb-1">{member.name}</h3>
-          <p className="text-blue-600 font-medium mb-2">{member.role}</p>
-          <p className="text-sm text-gray-600 mb-1">{member.program}</p>
-          <p className="text-sm text-gray-500">{member.year}</p>
-        </div>
-
-        {/* Back Side - Bio Only - Shows on Hover with Brand Colors */}
-        <div
-          className={`absolute inset-0 w-full h-full p-8 flex items-center justify-center text-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 ${
-            member.isPresident
-              ? "bg-bacsa-mountain-meadow" // Light green for presidents
-              : "bg-bacsa-cloud-burst" // Dark blue for other executives
-          }`}
-        >
-          <p className="text-lg leading-relaxed drop-shadow-sm font-medium text-white">{member.bio}</p>
-        </div>
+      <div className="w-full h-80 bg-white rounded-lg shadow-md border border-gray-100 p-6 flex flex-col items-center justify-center text-center">
+        {member.photo ? (
+          <div className="w-24 h-24 rounded-full overflow-hidden mb-4">
+            <img src={member.photo} alt={`${member.name} - ${member.role}`} className="w-full h-full object-cover" />
+          </div>
+        ) : (
+          <div className="w-24 h-24 bg-gradient-to-r from-blue-500 to-teal-400 rounded-full flex items-center justify-center mb-4">
+            <span className="text-white font-bold text-2xl">
+              {member.name
+                .split(" ")
+                .map((n) => n[0])
+                .join("")}
+            </span>
+          </div>
+        )}
+        <h3 className="text-xl font-semibold text-gray-900 mb-1">{member.name}</h3>
+        <p className="text-blue-600 font-medium mb-2">{member.role}</p>
+        <p className="text-sm text-gray-600 mb-1">{member.program}</p>
+        <p className="text-sm text-gray-500">{member.year}</p>
       </div>
     )
   }
@@ -239,23 +179,25 @@ export default function About() {
             </p>
           </div>
 
-          {/* Co-Presidents Row - 2 members */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12 max-w-4xl mx-auto">
+          {/* Co-Presidents */}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
             {coPresidents.map((member) => (
               <TeamMemberCard key={member.id} member={member} />
             ))}
           </div>
+        </div>
+      </section>
 
-          {/* Executive Team Row - 3 members */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
-            {executiveTeam.map((member) => (
-              <TeamMemberCard key={member.id} member={member} />
-            ))}
+      {/* Founders Section */}
+      <section className="py-20 bg-white">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-16">
+            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">Founders</h2>
+            <p className="text-xl text-gray-600 max-w-3xl mx-auto">The students who started BACSA</p>
           </div>
 
-          {/* Additional Team Row - 3 members */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {additionalTeam.map((member) => (
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+            {founders.map((member) => (
               <TeamMemberCard key={member.id} member={member} />
             ))}
           </div>
